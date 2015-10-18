@@ -1,5 +1,6 @@
-package com.wu.nfc;
+package com.wu.nfc.activity;
 
+import android.app.Activity;
 import android.nfc.NfcAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,12 +8,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity {
+import com.wu.nfc.R;
+
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         isNFc();
     }
 
@@ -30,12 +34,13 @@ public class MainActivity extends ActionBarActivity {
         NfcAdapter adapter =NfcAdapter.getDefaultAdapter(this);
         if (adapter!=null){
             Log.i("nfc","支持NFC!");
+            if (adapter.isEnabled()){
+                Log.i("nfc","NFC设备已启动！");
+            }else{
+                Log.i("nfc","NFC设备未启动！");
+            }
         }else{
-        if (adapter.isEnabled()){
-            Log.i("nfc","NFC设备已启动！");
-        }else{
-            Log.i("nfc","NFC设备未启动！");
-        }
+            Log.i("nfc","没有NFC");
 
         }
     }
